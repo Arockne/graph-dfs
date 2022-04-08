@@ -1,5 +1,30 @@
-function isPath(graph, vertexA, vertexB) {
-  // type your code here
+// function isPath(graph, vertexA, vertexB) {
+//   for (const point of graph[vertexA]) {
+//     if (point === vertexB) {
+//       return true;
+//     }
+//     if (isPath(graph, point, vertexB)) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+function isPath(graph, vertexA, vertexB, visited = new Set()) {
+  visited.add(vertexA);
+
+  for (const vertex of graph[vertexA]) {
+    if (vertex === vertexB) {
+      return true;
+    }
+
+    if (!visited.has(vertex)) {
+      if (isPath(graph, vertex, vertexB, visited)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 if (require.main === module) {
